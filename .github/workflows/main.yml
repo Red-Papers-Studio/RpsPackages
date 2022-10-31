@@ -1,0 +1,74 @@
+---
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  
+  test-repository:
+    name: Tests Repository.UnitTests
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_test.yml@main
+    with:
+      dotnet_version: 6.0.x
+      report_name: Test results for Repository.UnitTests
+      test_path: Repository/Repository.UnitTests
+  
+  test-modifiable-entities:
+    name: Tests ModifiableEntities.UnitTests
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_test.yml@main
+    with:
+      dotnet_version: 6.0.x
+      report_name: Test results for ModifiableEntities.UnitTests
+      test_path: ModifiableEntities/ModifiableEntities.UnitTests  
+      
+  push-repository-nuget:
+    needs: test-repository
+    name: Push Repository to GitHub Packages
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_nuget_push.yml@main
+    with:
+      project_name: Repository
+      dotnet_version: 6.0.x
+      project_path: Repository/Repository/
+  
+  push-repository-ef-nuget:
+    needs: test-repository
+    name: Push Repository.EntityFrameworkCore to GitHub Packages
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_nuget_push.yml@main
+    with:
+      project_name: Repository.EntityFrameworkCore
+      dotnet_version: 6.0.x
+      project_path: Repository/Repository.EntityFrameworkCore/
+   
+  push-modifiable-entities-nuget:
+    needs: test-modifiable-entities
+    name: Push ModifiableEntities to GitHub Packages
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_nuget_push.yml@main
+    with:
+      project_name: ModifiableEntities
+      dotnet_version: 6.0.x
+      project_path: ModifiableEntities/ModifiableEntities/   
+      
+  push-modifiable-entities-ef-nuget:
+    needs: test-modifiable-entities
+    name: Push ModifiableEntities.EntityFrameworkCore to GitHub Packages
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_nuget_push.yml@main
+    with:
+      project_name: ModifiableEntities.EntityFrameworkCore
+      dotnet_version: 6.0.x
+      project_path: ModifiableEntities/ModifiableEntities.EntityFrameworkCore/   
+      
+  push-modifiable-entities-identity-nuget:
+    needs: test-modifiable-entities
+    name: Push ModifiableEntities.Identity to GitHub Packages
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_nuget_push.yml@main
+    with:
+      project_name: ModifiableEntities.Identity
+      dotnet_version: 6.0.x
+      project_path: ModifiableEntities/ModifiableEntities.Identity/         
