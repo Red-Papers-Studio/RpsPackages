@@ -1,0 +1,26 @@
+---
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  
+  test-repository:
+    name: Tests Repository.UnitTests
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_test.yml@main
+    with:
+      dotnet_version: 6.0.x
+      report_name: Test results for Repository.UnitTests
+      test_path: Repository/Repository.UnitTests
+  
+  test-modifiable-entities:
+    name: Tests ModifiableEntities.UnitTests
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_test.yml@main
+    with:
+      dotnet_version: 6.0.x
+      report_name: Test results for ModifiableEntities.UnitTests
+      test_path: ModifiableEntities/ModifiableEntities.UnitTests 
