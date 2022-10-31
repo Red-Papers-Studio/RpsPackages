@@ -1,4 +1,7 @@
-﻿namespace Repository.EntityFrameworkCore;
+﻿using System.Globalization;
+using Microsoft.EntityFrameworkCore;
+
+namespace Repository.EntityFrameworkCore;
 
 /// <summary>
 ///     EntityFrameworkCore repository.
@@ -7,57 +10,74 @@
 public class RepositoryEf<T> : IRepositorySavable<T>
     where T : class
 {
+    private readonly DbContext _dbContext;
+    private readonly bool _useAsNoTracking;
+
+    /// <summary>
+    ///     Initializes a new instance of the class.
+    /// </summary>
+    /// <param name="dbContext">DbContext, which is used to store entities.</param>
+    /// <param name="useAsNoTracking">Set to true if you want to use AsNoTracking.</param>
+    /// <exception cref="ArgumentNullException">DbContext is null.</exception>
+    public RepositoryEf(DbContext dbContext, bool useAsNoTracking = true)
+    {
+        _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        _useAsNoTracking = useAsNoTracking;
+    }
+
     /// <inheritdoc />
     public void Create(T entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Set<T>().Add(entity);
     }
 
     /// <inheritdoc />
     public IQueryable<T> Read()
     {
-        throw new NotImplementedException();
+        IQueryable<T> res = _dbContext.Set<T>();
+        if (_useAsNoTracking) res.AsNoTracking();
+        return res;
     }
 
     /// <inheritdoc />
     public void Update(T entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Set<T>().Update(entity);
     }
 
     /// <inheritdoc />
     public void Delete(T entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Set<T>().Remove(entity);
     }
 
     /// <inheritdoc />
-    public Task CreateAsync(T entity)
+    public async Task CreateAsync(T entity)
     {
-        throw new NotImplementedException();
+        await _dbContext.Set<T>().AddAsync(entity);
     }
 
     /// <inheritdoc />
-    public Task UpdateAsync(T entity)
+    public async Task UpdateAsync(T entity)
     {
-        throw new NotImplementedException();
+        await Task.Run(() => _dbContext.Set<T>().Update(entity));
     }
 
     /// <inheritdoc />
-    public Task DeleteAsync(T entity)
+    public async Task DeleteAsync(T entity)
     {
-        throw new NotImplementedException();
+        await Task.Run(() => _dbContext.Set<T>().Remove(entity));
     }
 
     /// <inheritdoc />
     public void SaveChanges()
     {
-        throw new NotImplementedException();
+        _dbContext.SaveChanges();
     }
 
     /// <inheritdoc />
-    public Task SaveChangesAsync()
+    public async Task SaveChangesAsync()
     {
-        throw new NotImplementedException();
+        await _dbContext.SaveChangesAsync();
     }
 }
