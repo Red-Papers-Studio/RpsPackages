@@ -2,7 +2,6 @@ using FluentAssertions;
 using FluentAssertions.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ModifiableEntities.EntityFrameworkCore;
 using ModifiableEntities.Identity;
 
 namespace ModifiableEntities.UnitTests;
@@ -14,7 +13,8 @@ public class IdentityModifiableEntitiesDbContextTestCase
     public IdentityModifiableEntitiesDbContextTestCase()
     {
         DbContextOptions<IdentityModifiableEntitiesDbContext<IdentityUser<int>, IdentityRole<int>, int>> dbOptions =
-            new DbContextOptionsBuilder<IdentityModifiableEntitiesDbContext<IdentityUser<int>, IdentityRole<int>, int>>()
+            new DbContextOptionsBuilder<
+                    IdentityModifiableEntitiesDbContext<IdentityUser<int>, IdentityRole<int>, int>>()
                 .UseInMemoryDatabase("TestDB")
                 .Options;
 
@@ -94,7 +94,7 @@ public class IdentityModifiableEntitiesDbContextTestCase
         public DateTime LastModificationDateUtc { get; set; }
     }
 
-    private class TestingDbContext : IdentityModifiableEntitiesDbContext<IdentityUser<int>, IdentityRole<int>,int>
+    private class TestingDbContext : IdentityModifiableEntitiesDbContext<IdentityUser<int>, IdentityRole<int>, int>
     {
         public TestingDbContext(bool useLazyLoading = false) : base(useLazyLoading)
         {

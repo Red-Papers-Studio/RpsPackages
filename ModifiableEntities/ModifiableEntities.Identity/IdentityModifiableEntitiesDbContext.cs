@@ -6,7 +6,7 @@ using ModifiableEntities.EntityFrameworkCore.Extensions;
 namespace ModifiableEntities.Identity;
 
 /// <summary>
-///     <see cref="IdentityDbContext"/> for modifiable entities.
+///     <see cref="IdentityDbContext" /> for modifiable entities.
 /// </summary>
 /// <typeparam name="TUser">The type of user objects.</typeparam>
 /// <typeparam name="TRole">The type of role objects.</typeparam>
@@ -38,7 +38,7 @@ public class IdentityModifiableEntitiesDbContext<TUser, TRole, TKey> : IdentityM
 }
 
 /// <summary>
-///     <see cref="IdentityDbContext"/> for modifiable entities.
+///     <see cref="IdentityDbContext" /> for modifiable entities.
 /// </summary>
 /// <inheritdoc />
 public class IdentityModifiableEntitiesDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim,
