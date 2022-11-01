@@ -9,5 +9,5 @@ public interface IBaseEntity<TId>
     /// <summary>
     ///     Unique Id of entity.
     /// </summary>
-    TId Id { get; init; }
+    TId Id { get; set; }
 }

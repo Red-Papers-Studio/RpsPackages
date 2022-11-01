@@ -3,10 +3,12 @@ using ModifiableEntities.EntityFrameworkCore.Extensions;
 
 namespace ModifiableEntities.EntityFrameworkCore;
 
+
 /// <summary>
 ///     <see cref="DbContext"/> for modifiable entities.
 /// </summary>
-public class ModifiableEntitiesDbContext : DbContext
+/// <typeparam name="TId">Id type of entity.</typeparam>
+public class ModifiableEntitiesDbContext<TId> : DbContext
 {
     private readonly bool _useLazyLoading;
 
@@ -32,21 +34,21 @@ public class ModifiableEntitiesDbContext : DbContext
     /// <inheritdoc />
     public override int SaveChanges()
     {
-        this.ModifyEntitiesOnSaveChanges();
+        this.ModifyEntitiesOnSaveChanges<TId>();
         return base.SaveChanges();
     }
 
     /// <inheritdoc />
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
     {
-        this.ModifyEntitiesOnSaveChanges();
+        this.ModifyEntitiesOnSaveChanges<TId>();
         return base.SaveChanges(acceptAllChangesOnSuccess);
     }
 
     /// <inheritdoc />
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
-        this.ModifyEntitiesOnSaveChanges();
+        this.ModifyEntitiesOnSaveChanges<TId>();
         return base.SaveChangesAsync(cancellationToken);
     }
 
@@ -54,7 +56,7 @@ public class ModifiableEntitiesDbContext : DbContext
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
         CancellationToken cancellationToken = new CancellationToken())
     {
-        this.ModifyEntitiesOnSaveChanges();
+        this.ModifyEntitiesOnSaveChanges<TId>();
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 

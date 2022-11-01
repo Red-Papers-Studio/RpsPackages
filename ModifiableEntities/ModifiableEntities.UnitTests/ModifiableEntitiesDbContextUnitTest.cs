@@ -1,4 +1,5 @@
 using FluentAssertions;
+using FluentAssertions.Extensions;
 using Microsoft.EntityFrameworkCore;
 using ModifiableEntities.EntityFrameworkCore;
 
@@ -10,8 +11,8 @@ public class ModifiableEntitiesDbContextUnitTest : IDisposable
 
     public ModifiableEntitiesDbContextUnitTest()
     {
-        DbContextOptions<ModifiableEntitiesDbContext> dbOptions =
-            new DbContextOptionsBuilder<ModifiableEntitiesDbContext>()
+        DbContextOptions<ModifiableEntitiesDbContext<int>> dbOptions =
+            new DbContextOptionsBuilder<ModifiableEntitiesDbContext<int>>()
                 .UseInMemoryDatabase("TestDB")
                 .Options;
 
@@ -33,19 +34,19 @@ public class ModifiableEntitiesDbContextUnitTest : IDisposable
         _dbContext.Set<TestEntity>().Add(act);
         _dbContext.SaveChanges();
         
-        act.CreationDateUtc.Should().Be(DateTime.UtcNow);
-        act.LastModificationDateUtc.Should().Be(DateTime.UtcNow);
+        act.CreationDateUtc.Should().BeCloseTo(DateTime.UtcNow,1.Seconds());
+        act.LastModificationDateUtc.Should().BeCloseTo(DateTime.UtcNow,1.Seconds());
     }
 
     [Fact]
     public async void SaveChangesAsync_UpdatesCorrectlyCreationAndLastModificationDateTimeUtc()
     {
-        TestEntity act = new();
+        TestEntity act = new ();
         _dbContext.Set<TestEntity>().Add(act);
         await _dbContext.SaveChangesAsync();
         
-        act.CreationDateUtc.Should().Be(DateTime.UtcNow);
-        act.LastModificationDateUtc.Should().Be(DateTime.UtcNow);
+        act.CreationDateUtc.Should().BeCloseTo(DateTime.UtcNow,1.Seconds());
+        act.LastModificationDateUtc.Should().BeCloseTo(DateTime.UtcNow,1.Seconds());
     }
 
     public void Dispose()
@@ -64,12 +65,12 @@ public class ModifiableEntitiesDbContextUnitTest : IDisposable
 
     private class TestEntity : IBaseModifiableEntity<int>
     {
-        public int Id { get; init; }
-        public DateTime CreationDateUtc { get; init; }
-        public DateTime LastModificationDateUtc { get; init; }
+        public int Id { get; set; }
+        public DateTime CreationDateUtc { get; set; }
+        public DateTime LastModificationDateUtc { get; set; }
     }
 
-    private class TestingDbContext : ModifiableEntitiesDbContext
+    private class TestingDbContext : ModifiableEntitiesDbContext<int>
     {
         public TestingDbContext(bool useLazyLoading = false) : base(useLazyLoading)
         {
