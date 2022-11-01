@@ -9,4 +9,12 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ModifiableEntities.EntityFrameworkCore\ModifiableEntities.EntityFrameworkCore.csproj" />
+    </ItemGroup>
+
 </Project>
