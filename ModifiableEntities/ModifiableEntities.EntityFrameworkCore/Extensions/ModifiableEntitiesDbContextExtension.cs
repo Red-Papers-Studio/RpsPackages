@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ModifiableEntities.EntityFrameworkCore.Extensions;
@@ -18,18 +19,28 @@ public static class ModifiableEntitiesDbContextExtension
         IEnumerable<EntityEntry> entries = dbContext.ChangeTracker
             .Entries()
             .Where(e =>
-                e.Entity is IBaseModifiableEntity<TId> &&
+                e.Entity is BaseModifiableEntity<TId> &&
                 e.State is EntityState.Added or EntityState.Modified);
 
         foreach (EntityEntry entityEntry in entries)
         {
             DateTime utcNow = DateTime.UtcNow;
-            var entity = (IBaseModifiableEntity<TId>)entityEntry.Entity;
+            var entity = (BaseModifiableEntity<TId>)entityEntry.Entity;
 
-            entity.LastModificationDateUtc = utcNow;
+            GetPropertyInfo<BaseModifiableEntity<TId>>(nameof(BaseModifiableEntity<TId>.LastModificationDateUtc)).SetValue(entity, utcNow, null);
 
             if (entityEntry.State == EntityState.Added)
-                entity.CreationDateUtc = utcNow;
+                GetPropertyInfo<BaseModifiableEntity<TId>>(nameof(BaseModifiableEntity<TId>.CreationDateUtc)).SetValue(entity, utcNow, null);
         }
+    }
+
+    private static PropertyInfo GetPropertyInfo<T>(string propertyName)
+    {
+        return GetPropertyInfo(typeof(T), propertyName);
+    }
+
+    private static PropertyInfo GetPropertyInfo(Type type, string propertyName)
+    {
+        return type.GetProperty(propertyName) ?? throw new ArgumentException(nameof(propertyName));
     }
 }
