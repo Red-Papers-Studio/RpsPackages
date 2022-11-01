@@ -14,7 +14,6 @@ public class IdentityModifiableEntitiesDbContextTestCase : IClassFixture<Identit
         _dbFixture = dbFixture;
     }
 
-    
 
     [Fact]
     public void WhenEntityAdded_SaveChanges_SetsCorrectlyCreationAndLastModificationDateTimeUtc()

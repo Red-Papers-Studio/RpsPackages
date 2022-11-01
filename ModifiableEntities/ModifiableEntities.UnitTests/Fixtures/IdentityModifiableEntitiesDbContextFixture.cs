@@ -7,8 +7,6 @@ namespace ModifiableEntities.UnitTests.Fixtures;
 
 public class IdentityModifiableEntitiesDbContextFixture : IDisposable
 {
-    public DbContext DbContext { get; }
-    
     public IdentityModifiableEntitiesDbContextFixture()
     {
         DbContextOptions<IdentityModifiableEntitiesDbContext<IdentityUser<int>, IdentityRole<int>, int>> dbOptions =
@@ -25,24 +23,26 @@ public class IdentityModifiableEntitiesDbContextFixture : IDisposable
         DbContext.Set<TestEntity>().Add(new TestEntity());
         DbContext.SaveChanges();
     }
-    
-    ~IdentityModifiableEntitiesDbContextFixture()
-    {
-        Dispose(false);
-    }
-    
+
+    public DbContext DbContext { get; }
+
     public void Dispose()
     {
         Dispose(true);
         GC.SuppressFinalize(this);
     }
 
-    
+    ~IdentityModifiableEntitiesDbContextFixture()
+    {
+        Dispose(false);
+    }
+
+
     private void Dispose(bool disposing)
     {
         if (disposing) DbContext.Dispose();
     }
-    
+
     private class TestingDbContext : IdentityModifiableEntitiesDbContext<IdentityUser<int>, IdentityRole<int>, int>
     {
         public TestingDbContext(bool useLazyLoading = false) : base(useLazyLoading)
