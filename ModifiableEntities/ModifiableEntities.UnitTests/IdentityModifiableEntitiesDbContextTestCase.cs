@@ -6,7 +6,7 @@ using ModifiableEntities.Identity;
 
 namespace ModifiableEntities.UnitTests;
 
-public class IdentityModifiableEntitiesDbContextTestCase
+public class IdentityModifiableEntitiesDbContextTestCase : IDisposable
 {
     private readonly DbContext _dbContext;
 
