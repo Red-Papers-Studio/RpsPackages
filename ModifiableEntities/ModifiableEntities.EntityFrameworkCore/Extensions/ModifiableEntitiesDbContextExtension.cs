@@ -20,14 +20,14 @@ public static class ModifiableEntitiesDbContextExtension
             .Where(e =>
                 e.Entity is IBaseModifiableEntity<TId> &&
                 e.State is EntityState.Added or EntityState.Modified);
-        
+
         foreach (EntityEntry entityEntry in entries)
         {
             DateTime utcNow = DateTime.UtcNow;
             var entity = (IBaseModifiableEntity<TId>)entityEntry.Entity;
-        
+
             entity.LastModificationDateUtc = utcNow;
-        
+
             if (entityEntry.State == EntityState.Added)
                 entity.CreationDateUtc = utcNow;
         }

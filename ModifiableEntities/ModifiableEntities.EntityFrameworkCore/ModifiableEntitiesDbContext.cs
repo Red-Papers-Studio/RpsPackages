@@ -3,9 +3,8 @@ using ModifiableEntities.EntityFrameworkCore.Extensions;
 
 namespace ModifiableEntities.EntityFrameworkCore;
 
-
 /// <summary>
-///     <see cref="DbContext"/> for modifiable entities.
+///     <see cref="DbContext" /> for modifiable entities.
 /// </summary>
 /// <typeparam name="TId">Id type of entity.</typeparam>
 public class ModifiableEntitiesDbContext<TId> : DbContext
@@ -46,7 +45,7 @@ public class ModifiableEntitiesDbContext<TId> : DbContext
     }
 
     /// <inheritdoc />
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
         this.ModifyEntitiesOnSaveChanges<TId>();
         return base.SaveChangesAsync(cancellationToken);
@@ -54,7 +53,7 @@ public class ModifiableEntitiesDbContext<TId> : DbContext
 
     /// <inheritdoc />
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
-        CancellationToken cancellationToken = new CancellationToken())
+        CancellationToken cancellationToken = new())
     {
         this.ModifyEntitiesOnSaveChanges<TId>();
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
@@ -66,5 +65,4 @@ public class ModifiableEntitiesDbContext<TId> : DbContext
         if (_useLazyLoading) optionsBuilder.UseLazyLoadingProxies();
         base.OnConfiguring(optionsBuilder);
     }
-    
 }

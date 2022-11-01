@@ -3,7 +3,7 @@ using Repository.EntityFrameworkCore;
 
 namespace Repository.UnitTests;
 
-public class RepositoryEfUnitTest
+public class RepositoryEfTestCase
 {
     [Fact]
     public void CreateInstance_NullDbContext_ThrowsArgumentNullException()
