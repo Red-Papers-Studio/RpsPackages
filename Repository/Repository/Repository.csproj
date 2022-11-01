@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <RepositoryUrl>https://github.com/Red-Papers-Studio/RpsPackages</RepositoryUrl>
         <Version>1.0.0</Version>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
 </Project>
