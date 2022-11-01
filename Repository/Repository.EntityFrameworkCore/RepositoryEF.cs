@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Repository.EntityFrameworkCore;
 
@@ -28,6 +27,7 @@ public class RepositoryEf<T> : IRepositorySavable<T>
     /// <inheritdoc />
     public void Create(T entity)
     {
+        if (entity is null) throw new ArgumentNullException(nameof(entity));
         _dbContext.Set<T>().Add(entity);
     }
 
@@ -42,30 +42,35 @@ public class RepositoryEf<T> : IRepositorySavable<T>
     /// <inheritdoc />
     public void Update(T entity)
     {
+        if (entity is null) throw new ArgumentNullException(nameof(entity));
         _dbContext.Set<T>().Update(entity);
     }
 
     /// <inheritdoc />
     public void Delete(T entity)
     {
+        if (entity is null) throw new ArgumentNullException(nameof(entity));
         _dbContext.Set<T>().Remove(entity);
     }
 
     /// <inheritdoc />
     public async Task CreateAsync(T entity)
     {
+        if (entity is null) throw new ArgumentNullException(nameof(entity));
         await _dbContext.Set<T>().AddAsync(entity);
     }
 
     /// <inheritdoc />
     public async Task UpdateAsync(T entity)
     {
+        if (entity is null) throw new ArgumentNullException(nameof(entity));
         await Task.Run(() => _dbContext.Set<T>().Update(entity));
     }
 
     /// <inheritdoc />
     public async Task DeleteAsync(T entity)
     {
+        if (entity is null) throw new ArgumentNullException(nameof(entity));
         await Task.Run(() => _dbContext.Set<T>().Remove(entity));
     }
 
