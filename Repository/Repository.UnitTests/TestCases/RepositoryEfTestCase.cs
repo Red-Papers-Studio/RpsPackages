@@ -1,10 +1,18 @@
 using FluentAssertions;
 using Repository.EntityFrameworkCore;
+using Repository.UnitTests.Fixtures;
 
-namespace Repository.UnitTests;
+namespace Repository.UnitTests.TestCases;
 
-public class RepositoryEfTestCase
+public class RepositoryEfTestCase : IClassFixture<RepositoryEfFixture>
 {
+    private readonly RepositoryEfFixture _repFixture;
+
+    public RepositoryEfTestCase(RepositoryEfFixture repFixture)
+    {
+        _repFixture = repFixture;
+    }
+
     [Fact]
     public void CreateInstance_NullDbContext_ThrowsArgumentNullException()
     {
