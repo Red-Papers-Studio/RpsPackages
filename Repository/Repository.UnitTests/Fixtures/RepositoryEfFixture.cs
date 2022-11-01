@@ -6,8 +6,6 @@ namespace Repository.UnitTests.Fixtures;
 
 public class RepositoryEfFixture : IDisposable
 {
-    private readonly DbContext _dbContext;
-
     public RepositoryEfFixture()
     {
         DbContextOptions<TestingDbContext> dbOptions =
@@ -15,16 +13,17 @@ public class RepositoryEfFixture : IDisposable
                 .UseInMemoryDatabase("TestDB")
                 .Options;
 
-        _dbContext = new TestingDbContext(dbOptions);
+        DbContext = new TestingDbContext(dbOptions);
 
-        _dbContext.Database.EnsureDeleted();
-        _dbContext.Database.EnsureCreated();
+        DbContext.Database.EnsureDeleted();
+        DbContext.Database.EnsureCreated();
 
-        _dbContext.SaveChanges();
+        DbContext.SaveChanges();
 
-        Repository = new RepositoryEf<TestEntity>(_dbContext);
+        Repository = new RepositoryEf<TestEntity>(DbContext);
     }
 
+    public DbContext DbContext { get; }
     public IRepositorySavable<TestEntity> Repository { get; }
 
     public void Dispose()
@@ -40,7 +39,7 @@ public class RepositoryEfFixture : IDisposable
 
     private void Dispose(bool disposing)
     {
-        if (disposing) _dbContext.Dispose();
+        if (disposing) DbContext.Dispose();
     }
 
     private class TestingDbContext : DbContext
