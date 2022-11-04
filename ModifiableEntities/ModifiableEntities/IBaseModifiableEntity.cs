@@ -9,10 +9,10 @@ public interface IBaseModifiableEntity<TId> : IBaseEntity<TId>
     /// <summary>
     ///     Creation date of entity in UTC format.
     /// </summary>
-    public DateTime CreationDateUtc { get; set; }
+    public DateTime CreationDateUtc { get; init; }
 
     /// <summary>
     ///     Last modification date of entity in UTC format.
     /// </summary>
-    public DateTime LastModificationDateUtc { get; set; }
+    public DateTime LastModificationDateUtc { get; init; }
 }

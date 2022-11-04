@@ -2,7 +2,7 @@
 
 public class TestEntity : IBaseModifiableEntity<int>
 {
-    public int Id { get; set; }
-    public DateTime CreationDateUtc { get; set; }
-    public DateTime LastModificationDateUtc { get; set; }
+    public int Id { get; init; }
+    public DateTime CreationDateUtc { get; init; }
+    public DateTime LastModificationDateUtc { get; init; }
 }
