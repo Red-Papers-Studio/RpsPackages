@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RepositoryUrl>https://github.com/Red-Papers-Studio/RpsPackages</RepositoryUrl>
+        <Version>1.0.0</Version>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Authors>Red Papers Studio</Authors>
+    </PropertyGroup>
+
+</Project>
