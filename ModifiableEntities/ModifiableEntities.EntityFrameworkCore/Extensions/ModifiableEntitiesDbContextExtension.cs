@@ -27,13 +27,15 @@ public static class ModifiableEntitiesDbContextExtension
             DateTime utcNow = DateTime.UtcNow;
             var entity = (IBaseModifiableEntity<TId>)entityEntry.Entity;
 
-            GetPropertyInfo<IBaseModifiableEntity<TId>>(nameof(IBaseModifiableEntity<TId>.LastModificationDateUtc)).SetValue(entity, utcNow, null);
+            GetPropertyInfo<IBaseModifiableEntity<TId>>(nameof(IBaseModifiableEntity<TId>.LastModificationDateUtc))
+                .SetValue(entity, utcNow, null);
 
             if (entityEntry.State == EntityState.Added)
-                GetPropertyInfo<IBaseModifiableEntity<TId>>(nameof(IBaseModifiableEntity<TId>.CreationDateUtc)).SetValue(entity, utcNow, null);
+                GetPropertyInfo<IBaseModifiableEntity<TId>>(nameof(IBaseModifiableEntity<TId>.CreationDateUtc))
+                    .SetValue(entity, utcNow, null);
         }
     }
-    
+
     private static PropertyInfo GetPropertyInfo<T>(string propertyName)
     {
         return GetPropertyInfo(typeof(T), propertyName);
@@ -41,6 +43,7 @@ public static class ModifiableEntitiesDbContextExtension
 
     private static PropertyInfo GetPropertyInfo(Type type, string propertyName)
     {
-        return type.GetProperty(propertyName) ?? throw new ArgumentException("Property does not exist", nameof(propertyName));
+        return type.GetProperty(propertyName) ??
+               throw new ArgumentException("Property does not exist", nameof(propertyName));
     }
 }

@@ -8,14 +8,7 @@ namespace DomainDrivenDesign;
 /// <typeparam name="TId">Id type of entity.</typeparam>
 public abstract class Entity<TId> : IBaseEntity<TId>
 {
-    /// <inheritdoc />
-    public TId Id { get; init; }
-    
     private readonly List<Event> _events;
-    /// <summary>
-    ///     Entity events list.
-    /// </summary>
-    public IReadOnlyList<Event> Events => _events.AsReadOnly();
 
     /// <summary>
     ///     Initializes a new instance of the class.
@@ -26,6 +19,14 @@ public abstract class Entity<TId> : IBaseEntity<TId>
         Id = id;
         _events = new List<Event>();
     }
+
+    /// <summary>
+    ///     Entity events list.
+    /// </summary>
+    public IReadOnlyList<Event> Events => _events.AsReadOnly();
+
+    /// <inheritdoc />
+    public TId Id { get; init; }
 
     /// <summary>
     ///     Adds event to entity events list.
@@ -44,6 +45,4 @@ public abstract class Entity<TId> : IBaseEntity<TId>
     {
         _events.Remove(@event);
     }
-
-
 }

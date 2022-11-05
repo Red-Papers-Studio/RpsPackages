@@ -9,15 +9,6 @@ namespace DomainDrivenDesign;
 public abstract class Enumeration<TId>
 {
     /// <summary>
-    ///     Enumeration Id.
-    /// </summary>
-    public TId Id { get; }
-    /// <summary>
-    ///     Enumeration name.
-    /// </summary>
-    public string Name { get; }
-
-    /// <summary>
     ///     Initializes a new instance of the class.
     /// </summary>
     /// <param name="id">Id of enumeration.</param>
@@ -29,9 +20,19 @@ public abstract class Enumeration<TId>
         Name = name ?? throw new ArgumentNullException(nameof(name));
     }
 
+    /// <summary>
+    ///     Enumeration Id.
+    /// </summary>
+    public TId Id { get; }
 
     /// <summary>
-    ///     Get all enumeration static instances stored inside enumeration implementation with <typeparamref name="T"/> type
+    ///     Enumeration name.
+    /// </summary>
+    public string Name { get; }
+
+
+    /// <summary>
+    ///     Get all enumeration static instances stored inside enumeration implementation with <typeparamref name="T" /> type
     /// </summary>
     /// <typeparam name="T">Enumeration implementation type.</typeparam>
     /// <returns>Enumeration instances.</returns>
@@ -46,7 +47,8 @@ public abstract class Enumeration<TId>
 
 
     /// <summary>
-    ///     Returns enumeration static instances with <paramref name="id"/> which is stored inside enumeration implementation with <typeparamref name="T"/> type
+    ///     Returns enumeration static instances with <paramref name="id" /> which is stored inside enumeration implementation
+    ///     with <typeparamref name="T" /> type
     /// </summary>
     /// <param name="id">Enumeration id.</param>
     /// <typeparam name="T">Enumeration implementation type</typeparam>
@@ -57,7 +59,8 @@ public abstract class Enumeration<TId>
     }
 
     /// <summary>
-    ///     Returns enumeration static instances with <paramref name="name"/> which is stored inside enumeration implementation with <typeparamref name="T"/> type
+    ///     Returns enumeration static instances with <paramref name="name" /> which is stored inside enumeration
+    ///     implementation with <typeparamref name="T" /> type
     /// </summary>
     /// <param name="name">Enumeration name.</param>
     /// <typeparam name="T">Enumeration implementation type</typeparam>

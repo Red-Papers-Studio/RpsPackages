@@ -11,8 +11,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\ModifiableEntities\ModifiableEntities\ModifiableEntities.csproj" />
-      <ProjectReference Include="..\..\Repository\Repository\Repository.csproj" />
+        <ProjectReference Include="..\..\ModifiableEntities\ModifiableEntities\ModifiableEntities.csproj"/>
+        <ProjectReference Include="..\..\Repository\Repository\Repository.csproj"/>
     </ItemGroup>
 
 </Project>
