@@ -25,3 +25,11 @@ jobs:
       dotnet_version: 6.0.x
       project_name: ModifiableEntities.UnitTests
       test_path: ModifiableEntities/ModifiableEntities.UnitTests 
+      
+  test-domain-driven-design:
+    name: Tests DomainDrivenDesign.UnitTests
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_test.yml@main
+    with:
+      dotnet_version: 6.0.x
+      project_name: DomainDrivenDesign.UnitTests
+      test_path: DomainDrivenDesign/DomainDrivenDesign.UnitTests

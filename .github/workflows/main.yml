@@ -24,7 +24,15 @@ jobs:
       dotnet_version: 6.0.x
       project_name: ModifiableEntities.UnitTests
       test_path: ModifiableEntities/ModifiableEntities.UnitTests  
-      
+  
+  test-domain-driven-design:
+    name: Tests DomainDrivenDesign.UnitTests
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_test.yml@main
+    with:
+      dotnet_version: 6.0.x
+      project_name: DomainDrivenDesign.UnitTests
+      test_path: DomainDrivenDesign/DomainDrivenDesign.UnitTests
+  
   push-repository-nuget:
     needs: test-repository
     name: Push Repository to GitHub Packages
@@ -68,4 +76,13 @@ jobs:
     with:
       project_name: ModifiableEntities.Identity
       dotnet_version: 6.0.x
-      project_path: ModifiableEntities/ModifiableEntities.Identity/         
+      project_path: ModifiableEntities/ModifiableEntities.Identity/        
+  
+  push-DomainDrivenDesign:
+    needs: test-domain-driven-design
+    name: Push DomainDrivenDesign to GitHub Packages
+    uses: Red-Papers-Studio/.github/.github/workflows/dotnet_nuget_push.yml@main
+    with:
+      project_name: DomainDrivenDesign
+      dotnet_version: 6.0.x
+      project_path: DomainDrivenDesign/DomainDrivenDesign/ 
