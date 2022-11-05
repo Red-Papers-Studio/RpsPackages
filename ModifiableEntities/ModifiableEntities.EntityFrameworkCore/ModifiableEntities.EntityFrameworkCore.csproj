@@ -7,15 +7,16 @@
         <RepositoryUrl>https://github.com/Red-Papers-Studio/RpsPackages</RepositoryUrl>
         <Version>1.0.0</Version>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Authors>Red Papers Studio</Authors>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-rc.2.22472.11"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0-rc.2.22472.11"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-rc.2.22472.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0-rc.2.22472.11" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ModifiableEntities\ModifiableEntities.csproj"/>
+        <ProjectReference Include="..\ModifiableEntities\ModifiableEntities.csproj" />
     </ItemGroup>
 
 </Project>

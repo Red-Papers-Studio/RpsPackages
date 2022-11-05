@@ -7,14 +7,15 @@
         <RepositoryUrl>https://github.com/Red-Papers-Studio/RpsPackages</RepositoryUrl>
         <Version>1.0.0</Version>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Authors>Red Papers Studio</Authors>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Repository\Repository.csproj"/>
+        <ProjectReference Include="..\Repository\Repository.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-rc.2.22472.11"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-rc.2.22472.11" />
     </ItemGroup>
 
 </Project>
