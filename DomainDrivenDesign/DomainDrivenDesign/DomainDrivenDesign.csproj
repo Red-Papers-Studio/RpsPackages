@@ -10,4 +10,9 @@
         <Authors>Red Papers Studio</Authors>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\ModifiableEntities\ModifiableEntities\ModifiableEntities.csproj" />
+      <ProjectReference Include="..\..\Repository\Repository\Repository.csproj" />
+    </ItemGroup>
+
 </Project>

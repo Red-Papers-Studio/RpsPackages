@@ -1,4 +1,4 @@
-namespace DomainDrivenDesign.UnitTests;
+namespace DomainDrivenDesign.UnitTests.TestCases;
 
 public class UnitTest1
 {
