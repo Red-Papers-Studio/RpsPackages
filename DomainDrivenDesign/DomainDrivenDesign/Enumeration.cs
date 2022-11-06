@@ -6,7 +6,7 @@ namespace DomainDrivenDesign;
 ///     Enumeration class.
 /// </summary>
 /// <typeparam name="TId">Id type of enumeration.</typeparam>
-public abstract class Enumeration<TId>
+public abstract class Enumeration<TId> : IComparable<Enumeration<TId>> where TId : IComparable
 {
     /// <summary>
     ///     Initializes a new instance of the class.
@@ -68,5 +68,13 @@ public abstract class Enumeration<TId>
     public static Enumeration<TId> FromName<T>(string name) where T : Enumeration<TId>
     {
         return GetAll<T>().Single(e => string.Equals(e.Name, name, StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// <inheritdoc />
+    public int CompareTo(Enumeration<TId>? other)
+    {
+        if (ReferenceEquals(this, other)) return 0;
+        if (ReferenceEquals(null, other)) return 1;
+        return Id.CompareTo(other.Id);
     }
 }

@@ -40,7 +40,7 @@ public abstract class ValueObject : ICloneable
     ///     Get equality components.
     /// </summary>
     /// <returns>objects that represents all equality components.</returns>
-    protected abstract IEnumerable<object> GetEqualityComponents();
+    protected abstract IEnumerable<object?> GetEqualityComponents();
 
     /// <inheritdoc />
     public override bool Equals(object? obj)

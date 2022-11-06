@@ -1,5 +1,8 @@
 using FluentAssertions;
 using FluentAssertions.Extensions;
+using Microsoft.AspNetCore.Identity;
+using ModifiableEntities.EntityFrameworkCore;
+using ModifiableEntities.Identity;
 using ModifiableEntities.UnitTests.Data;
 using ModifiableEntities.UnitTests.Fixtures;
 
@@ -12,6 +15,15 @@ public class IdentityModifiableEntitiesDbContextTestCase : IClassFixture<Identit
     public IdentityModifiableEntitiesDbContextTestCase(IdentityModifiableEntitiesDbContextFixture dbFixture)
     {
         _dbFixture = dbFixture;
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void CreateInstance_DoesNotThrowException(bool useLazyLoading)
+    {
+        Action act = () => new IdentityModifiableEntitiesDbContext<IdentityUser<int>, IdentityRole<int>, int>(useLazyLoading);
+        act.Should().NotThrow();
     }
 
 
