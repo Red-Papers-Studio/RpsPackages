@@ -1,5 +1,6 @@
 using FluentAssertions;
 using FluentAssertions.Extensions;
+using ModifiableEntities.EntityFrameworkCore;
 using ModifiableEntities.UnitTests.Data;
 using ModifiableEntities.UnitTests.Fixtures;
 
@@ -12,6 +13,15 @@ public class ModifiableEntitiesDbContextTestCase : IClassFixture<ModifiableEntit
     public ModifiableEntitiesDbContextTestCase(ModifiableEntitiesDbContextFixture dbFixture)
     {
         _dbFixture = dbFixture;
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void CreateInstance_DoesNotThrowException(bool useLazyLoading)
+    {
+        Func<ModifiableEntitiesDbContext<int>> act = () => new ModifiableEntitiesDbContext<int>(useLazyLoading);
+        act.Should().NotThrow();
     }
 
     [Fact]

@@ -7,6 +7,7 @@
         <RepositoryUrl>https://github.com/Red-Papers-Studio/RpsPackages</RepositoryUrl>
         <Version>1.0.0</Version>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Authors>Red Papers Studio</Authors>
     </PropertyGroup>
 
     <ItemGroup>

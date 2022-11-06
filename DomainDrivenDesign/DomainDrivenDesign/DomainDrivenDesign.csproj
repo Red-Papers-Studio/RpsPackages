@@ -11,11 +11,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Repository\Repository.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-rc.2.22472.11"/>
+        <ProjectReference Include="..\..\ModifiableEntities\ModifiableEntities\ModifiableEntities.csproj"/>
+        <ProjectReference Include="..\..\Repository\Repository\Repository.csproj"/>
     </ItemGroup>
 
 </Project>

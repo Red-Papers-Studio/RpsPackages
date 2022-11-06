@@ -19,18 +19,20 @@ public static class ModifiableEntitiesDbContextExtension
         IEnumerable<EntityEntry> entries = dbContext.ChangeTracker
             .Entries()
             .Where(e =>
-                e.Entity is BaseModifiableEntity<TId> &&
+                e.Entity is IBaseModifiableEntity<TId> &&
                 e.State is EntityState.Added or EntityState.Modified);
 
         foreach (EntityEntry entityEntry in entries)
         {
             DateTime utcNow = DateTime.UtcNow;
-            var entity = (BaseModifiableEntity<TId>)entityEntry.Entity;
+            var entity = (IBaseModifiableEntity<TId>)entityEntry.Entity;
 
-            GetPropertyInfo<BaseModifiableEntity<TId>>(nameof(BaseModifiableEntity<TId>.LastModificationDateUtc)).SetValue(entity, utcNow, null);
+            GetPropertyInfo<IBaseModifiableEntity<TId>>(nameof(IBaseModifiableEntity<TId>.LastModificationDateUtc))
+                .SetValue(entity, utcNow, null);
 
             if (entityEntry.State == EntityState.Added)
-                GetPropertyInfo<BaseModifiableEntity<TId>>(nameof(BaseModifiableEntity<TId>.CreationDateUtc)).SetValue(entity, utcNow, null);
+                GetPropertyInfo<IBaseModifiableEntity<TId>>(nameof(IBaseModifiableEntity<TId>.CreationDateUtc))
+                    .SetValue(entity, utcNow, null);
         }
     }
 
@@ -41,6 +43,7 @@ public static class ModifiableEntitiesDbContextExtension
 
     private static PropertyInfo GetPropertyInfo(Type type, string propertyName)
     {
-        return type.GetProperty(propertyName) ?? throw new ArgumentException(nameof(propertyName));
+        return type.GetProperty(propertyName) ??
+               throw new ArgumentException("Property does not exist", nameof(propertyName));
     }
 }

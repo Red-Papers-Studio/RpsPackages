@@ -35,21 +35,24 @@ public interface IRepository<T>
     ///     Asynchronously creates an entity in repository.
     /// </summary>
     /// <param name="entity">Creating entity.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A Task that represents asynchronous creating operation.</returns>
-    Task CreateAsync(T entity);
+    Task CreateAsync(T entity, CancellationToken cancellationToken = default);
 
 
     /// <summary>
     ///     Asynchronously updates an entity in repository.
     /// </summary>
     /// <param name="entity">Updating entity.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A Task that represents asynchronous updating operation.</returns>
-    Task UpdateAsync(T entity);
+    Task UpdateAsync(T entity, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Asynchronously deletes an entity in repository.
     /// </summary>
     /// <param name="entity">Deleting entity.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A Task that represents asynchronous deleting operation.</returns>
-    Task DeleteAsync(T entity);
+    Task DeleteAsync(T entity, CancellationToken cancellationToken = default);
 }

@@ -54,24 +54,24 @@ public class RepositoryEf<T> : IRepositorySavable<T>
     }
 
     /// <inheritdoc />
-    public async Task CreateAsync(T entity)
+    public async Task CreateAsync(T entity, CancellationToken cancellationToken = default)
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));
-        await _dbContext.Set<T>().AddAsync(entity);
+        await _dbContext.Set<T>().AddAsync(entity, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task UpdateAsync(T entity)
+    public async Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));
-        await Task.Run(() => _dbContext.Set<T>().Update(entity));
+        await Task.Run(() => _dbContext.Set<T>().Update(entity), cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task DeleteAsync(T entity)
+    public async Task DeleteAsync(T entity, CancellationToken cancellationToken = default)
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));
-        await Task.Run(() => _dbContext.Set<T>().Remove(entity));
+        await Task.Run(() => _dbContext.Set<T>().Remove(entity), cancellationToken);
     }
 
     /// <inheritdoc />
@@ -81,8 +81,8 @@ public class RepositoryEf<T> : IRepositorySavable<T>
     }
 
     /// <inheritdoc />
-    public async Task SaveChangesAsync()
+    public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        await _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }
