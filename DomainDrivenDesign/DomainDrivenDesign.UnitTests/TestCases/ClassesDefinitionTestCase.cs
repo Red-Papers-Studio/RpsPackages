@@ -35,8 +35,8 @@ public class ClassesDefinitionTestCase
         Type act = typeof(TestEnumeration);
         act.Should().BeDerivedFrom<Enumeration<int>>().And.Implement<IComparable<Enumeration<int>>>();
         act.GetFields(BindingFlags.Public |
-                          BindingFlags.Static |
-                          BindingFlags.DeclaredOnly).Should().NotBeNullOrEmpty();
+                      BindingFlags.Static |
+                      BindingFlags.DeclaredOnly).Should().NotBeNullOrEmpty();
     }
 
     [Fact]

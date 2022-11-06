@@ -1,4 +1,4 @@
-﻿using System.Security.AccessControl;
+﻿using System.Diagnostics.CodeAnalysis;
 using DomainDrivenDesign.UnitTests.Data;
 using FluentAssertions;
 
@@ -10,7 +10,7 @@ public class ValueObjectTestCase
     public void Clone_ReturnsMemberwiseCloneObject()
     {
         var obj = new TestValueObject();
-        var exp = new TestValueObject()
+        var exp = new TestValueObject
         {
             Age = obj.Age,
             Name = obj.Name?.Clone() as string
@@ -67,7 +67,7 @@ public class ValueObjectTestCase
 
         act.Should().Be(exp);
     }
-    
+
     [Fact]
     public void EqualOperator_WithAtLeastOneNullValueObjects_ReturnsFalse()
     {
@@ -78,8 +78,9 @@ public class ValueObjectTestCase
 
         act.Should().Be(exp);
     }
-    
+
     [Fact]
+    [SuppressMessage("ReSharper", "EqualExpressionComparison")]
     public void EqualOperator_WithSameReference_ReturnsTrue()
     {
         const bool exp = true;
@@ -88,12 +89,13 @@ public class ValueObjectTestCase
 
         act.Should().Be(exp);
     }
-    
+
     [Theory]
     [InlineData(0, null, 0, "")]
     [InlineData(1, "", 1, null)]
     [InlineData(1, "", 2, "Test")]
-    public void NotEqualOperator_WithNotEqualValuedValueObjects_ReturnsTrue(int ageA, string nameA, int ageB, string nameB)
+    public void NotEqualOperator_WithNotEqualValuedValueObjects_ReturnsTrue(int ageA, string nameA, int ageB,
+        string nameB)
     {
         const bool exp = true;
         var objA = new TestValueObject { Age = ageA, Name = nameA };
@@ -102,8 +104,9 @@ public class ValueObjectTestCase
 
         act.Should().Be(exp);
     }
-    
+
     [Fact]
+    [SuppressMessage("ReSharper", "EqualExpressionComparison")]
     public void NotEqualOperator_WithSameReference_ReturnsFalse()
     {
         const bool exp = false;

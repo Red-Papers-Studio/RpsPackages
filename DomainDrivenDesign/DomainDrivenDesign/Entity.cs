@@ -1,4 +1,5 @@
-﻿using ModifiableEntities;
+﻿using System.Diagnostics.CodeAnalysis;
+using ModifiableEntities;
 
 namespace DomainDrivenDesign;
 
@@ -23,6 +24,7 @@ public abstract class Entity<TId> : IBaseEntity<TId>
     /// <summary>
     ///     Entity events list.
     /// </summary>
+    [SuppressMessage("ReSharper", "ReturnTypeCanBeEnumerable.Global")]
     public IReadOnlyList<Event> Events => _events.AsReadOnly();
 
     /// <inheritdoc />

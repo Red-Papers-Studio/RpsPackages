@@ -30,6 +30,13 @@ public abstract class Enumeration<TId> : IComparable<Enumeration<TId>> where TId
     /// </summary>
     public string Name { get; }
 
+    /// <inheritdoc />
+    public int CompareTo(Enumeration<TId>? other)
+    {
+        if (ReferenceEquals(this, other)) return 0;
+        return ReferenceEquals(null, other) ? 1 : Id.CompareTo(other.Id);
+    }
+
 
     /// <summary>
     ///     Get all enumeration static instances stored inside enumeration implementation with <typeparamref name="T" /> type
@@ -68,13 +75,5 @@ public abstract class Enumeration<TId> : IComparable<Enumeration<TId>> where TId
     public static Enumeration<TId> FromName<T>(string name) where T : Enumeration<TId>
     {
         return GetAll<T>().Single(e => string.Equals(e.Name, name, StringComparison.OrdinalIgnoreCase));
-    }
-
-    /// <inheritdoc />
-    public int CompareTo(Enumeration<TId>? other)
-    {
-        if (ReferenceEquals(this, other)) return 0;
-        if (ReferenceEquals(null, other)) return 1;
-        return Id.CompareTo(other.Id);
     }
 }

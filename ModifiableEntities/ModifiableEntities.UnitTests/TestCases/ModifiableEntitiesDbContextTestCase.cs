@@ -14,13 +14,13 @@ public class ModifiableEntitiesDbContextTestCase : IClassFixture<ModifiableEntit
     {
         _dbFixture = dbFixture;
     }
-    
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
     public void CreateInstance_DoesNotThrowException(bool useLazyLoading)
     {
-        Action act = () => new ModifiableEntitiesDbContext<int>(useLazyLoading);
+        Func<ModifiableEntitiesDbContext<int>> act = () => new ModifiableEntitiesDbContext<int>(useLazyLoading);
         act.Should().NotThrow();
     }
 

@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Data.Common;
-using DomainDrivenDesign.UnitTests.Data;
+﻿using DomainDrivenDesign.UnitTests.Data;
 using FluentAssertions;
 
 namespace DomainDrivenDesign.UnitTests.TestCases;
@@ -102,7 +100,7 @@ public class EnumerationTestCase
         List<TestEnumeration> exp = TestEnumeration.GetAll<TestEnumeration>().ToList();
         List<TestEnumeration> act = TestEnumeration.GetAll<TestEnumeration>().ToList();
 
-        exp.Sort((a,b)=>a.Id.CompareTo(b.Id));
+        exp.Sort((a, b) => a.Id.CompareTo(b.Id));
         act.Sort();
         act.Should().BeInAscendingOrder().And.ContainInOrder(exp);
     }
@@ -114,7 +112,7 @@ public class EnumerationTestCase
         int act = TestEnumeration.Test0.CompareTo(null);
         act.Should().Be(exp);
     }
-    
+
     [Fact]
     public void CompareTo_WithIdenticalEnumeration_Returns0()
     {
